@@ -1,23 +1,18 @@
-package me.geik.invmng.item;
+package me.geik.invmng.cart;
 
 import lombok.Data;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Document
-public class Item {
-
+public class Cart {
     @Id
     private ObjectId id = new ObjectId();
-    private String name;
-    private Double cartId;
-    private Double price;
-    private Integer qty;
-    private boolean available;
+    private boolean closed;
+    private Integer amount;
+    private String description;
     private String createDate;
     private String updateDate;
-
 }
