@@ -15,4 +15,6 @@ public class Cart {
     private String description;
     private String createDate;
     private String updateDate;
+
+    public Cart(){}
 }

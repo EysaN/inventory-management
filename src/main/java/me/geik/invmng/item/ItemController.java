@@ -1,7 +1,9 @@
 package me.geik.invmng.item;
 
-import org.bson.Document;
 import org.bson.types.ObjectId;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,8 @@ import java.util.List;
 @RestController
 public class ItemController {
 
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     private final ItemRepository item;
 
     public ItemController(ItemRepository item){
@@ -24,24 +28,28 @@ public class ItemController {
     @GetMapping("/items")
     @ResponseBody
     public List<Item> findAllItems() throws DataAccessException {
+        logger.info("Getting all items");
         return new ArrayList<>(this.item.findAll());
     }
 
     @GetMapping("/item/{id}")
     @ResponseBody
     public Item findItemById(@PathVariable ObjectId id) throws DataAccessException {
+        logger.info("Getting an item by id");
         return this.item.findItemById(id);
     }
 
     @GetMapping("/itemsByCart/{cartId}")
     @ResponseBody
     public List<Item> findItemByCartId(@PathVariable Double cartId) throws DataAccessException {
+        logger.info("Getting an item by CartId");
         return this.item.findItemsByCartId(cartId);
     }
 
     @GetMapping("/itemsByName/{name}")
     @ResponseBody
     public List<Item> findItemByName(@PathVariable String name) throws DataAccessException {
+        logger.info("Getting an item by Name");
         return this.item.findItemsByName(name);
     }
 
@@ -57,7 +65,7 @@ public class ItemController {
             @RequestParam(name="createDate", required = false, defaultValue = "0") String createDate,
             @RequestParam(name="updateDate", required = false, defaultValue = "0") String updateDate
     ) throws DataAccessException {
-
+        logger.info("Adding new item");
         // add default values for the date fields
         if (createDate.equals("0")){
             createDate = getDateNow();
@@ -73,6 +81,7 @@ public class ItemController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public void deleteById(@PathVariable ObjectId id) throws DataAccessException {
+        logger.info("Deleting an item by id");
         this.item.deleteById(id);
     }
 
@@ -80,6 +89,7 @@ public class ItemController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public void deleteAllByCartId(@PathVariable Double cartId) throws DataAccessException {
+        logger.info("Deleting all items by CartId");
         this.item.deleteAllByCartId(cartId);
     }
 
@@ -87,6 +97,7 @@ public class ItemController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public void deleteAllByName(@PathVariable String name) throws DataAccessException {
+        logger.info("Deleting all items by Name");
         this.item.deleteAllByName(name);
     }
 

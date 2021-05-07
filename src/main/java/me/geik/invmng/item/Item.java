@@ -22,6 +22,8 @@ public class Item {
     private String createDate;
     private String updateDate;
 
+    public Item() {}
+
     public Item(String name, Double cartId, Double price, Integer qty, boolean available, String createDate, String updateDate) {
         this.name = name;
         this.cartId = cartId;
