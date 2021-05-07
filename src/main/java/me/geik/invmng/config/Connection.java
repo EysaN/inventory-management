@@ -1,3 +1,7 @@
+/*
+ * This class is only used to test the connectivity of the mongodb URI
+ */
+
 package me.geik.invmng.config;
 
 import com.mongodb.client.MongoClient;
