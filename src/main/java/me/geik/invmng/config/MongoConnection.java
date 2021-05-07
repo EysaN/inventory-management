@@ -26,7 +26,7 @@ public class MongoConnection {
 
     private MongoClient createMongoClient() {
         // create connection string instance
-        ConnectionString connectionString = new ConnectionString(System.getProperty("mongodb.uri")); //"-Dmongodb.uri=\"mongodb://localhost:27017/inventory\"");
+        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/inventory"); //"-Dmongodb.uri=\"mongodb://localhost:27017/inventory\"");
         // handle the translation to and from BSON for this POJO
         CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
         // add the default codec registry, which contains all the default codecs

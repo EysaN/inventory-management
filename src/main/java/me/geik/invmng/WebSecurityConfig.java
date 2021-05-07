@@ -17,6 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/submanager").hasAnyRole("SUBMANAGERS", "MANAGERS")
                 .antMatchers("/developer").hasAnyRole("DEVELOPERS" ,"SUBMANAGERS" ,"MANAGERS")
                 .antMatchers("/items").hasAnyRole("DEVELOPERS" ,"SUBMANAGERS" ,"MANAGERS")
+                .antMatchers("/item/{id}").hasAnyRole("DEVELOPERS" ,"SUBMANAGERS" ,"MANAGERS")
                 .antMatchers("/").permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and()
