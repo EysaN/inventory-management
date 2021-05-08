@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+// using the @Data annotation helps to keep the code clean and generate all setters and getters for us
 @Data
 @Document(collection = "item")
 public class Item {

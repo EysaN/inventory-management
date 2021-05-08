@@ -17,7 +17,7 @@
  - The application's configuration (ports, hosts, ...) can also be modified in the `application.properties` file.
 
 
-**_In case of any problem, please refer to the author_**
+**_In case of any problems, please refer to the author_**
 
 **_This project is only intended for educational purposes, and not to be used commercially or production-ready_**
 
@@ -45,6 +45,11 @@ The solution provided here offers a modern approach to build an inventory manage
 * Spring Web for http requests
 * Spring Security for authentication and authorization
 
+
+
+This project operates on the [Project Lomnok](https://projectlombok.org/) for clean code.
+
+Using the `@Data` annotation, we don't need to create any constructors, setters or getters, hash and equals, or toString functions unless customization is required  
 
 
 

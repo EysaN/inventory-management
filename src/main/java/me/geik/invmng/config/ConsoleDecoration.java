@@ -1,4 +1,8 @@
 package me.geik.invmng.config;
+/*
+ * This class is only used prettify the console print upon connecting
+ * It has no other purpose in this project
+ */
 
 public class ConsoleDecoration {
 

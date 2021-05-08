@@ -12,7 +12,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackageClasses = {ItemRepository.class, CartRepository.class})
 @Configuration
 public class MongoDBConfig {
-
+    /*
+    * This class will initialize new empty collections if not found when the program starts
+    * */
     @Bean
     CommandLineRunner commandLineRunner(ItemRepository itemRepository, CartRepository cartRepository) {
         return strings -> {
