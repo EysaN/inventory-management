@@ -28,6 +28,7 @@ The solution provided here offers a modern approach to build an inventory manage
  - A mongodb database should exist under the name `inventory`
  - No standalone LDAP server required
  - Port `8399` should be available to run the embedded LDAP server
+ - Port `8080` should be available to start the spring boot tomcat
  - The application's configuration (ports, hosts, ...) can also be modified in the `application.properties` file.
 
 
