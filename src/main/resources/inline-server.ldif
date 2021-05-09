@@ -104,6 +104,15 @@ sn: Cadet
 uid: space cadet
 userPassword: spacecadetspassword
 
+dn: uid=dbu,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Databases User
+sn: User
+uid: dbu
+userPassword: $2y$12$A17UJcFzJFAmfnaU0lzqUepQFrnNluN.lXInOecDgrY/RzUqvS41u
 
 
 dn: cn=developers,ou=groups,dc=springframework,dc=org
@@ -121,6 +130,7 @@ cn: managers
 ou: manager
 uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
 uniqueMember: cn=mouse\, jerry,ou=people,dc=springframework,dc=org
+uniqueMember: uid=dbu,ou=people,dc=springframework,dc=org
 
 dn: cn=submanagers,ou=subgroups,ou=groups,dc=springframework,dc=org
 objectclass: top

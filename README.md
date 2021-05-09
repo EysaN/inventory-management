@@ -60,6 +60,8 @@ Then create new connection configuration and click run or open the class `Invmng
 
 ---
 
+To authenticate use this username `dbu` and password `databases`
+
 + find all items
 ```http request
 http://localhost:8080/items
