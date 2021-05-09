@@ -8,9 +8,14 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-// No need implementation, just one interface, and you have CRUD, thanks Spring Data
+// No need for implementation, using this interface only gives us CRUD operations due to Spring Data
 @RepositoryRestResource(collectionResourceRel = "item", path = "item")
 public interface ItemRepository extends MongoRepository<Item, ObjectId> {
+
+    /**
+     * The following functions allows us to make database transactions
+     * like find, insert, delete, update
+     * */
 
     List<Item> findAll();
 

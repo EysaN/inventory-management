@@ -7,14 +7,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-// using the @Data annotation helps to keep the code clean and generate all setters and getters for us
+// This annotation is described in README file
 @Data
+/**
+ * This annotation makes spring-boot-mongodb knows that this class represents a mongodb document
+ * which is to be stored within the item collection of the database
+ * */
 @Document(collection = "item")
 public class Item {
 
+    // we are defining that the "id" attribute is linked to (_id) field in our document
     @Id
     private ObjectId id = new ObjectId();
     private String name;
+    // Creating an index on attribute cartId to optimize search by cart id
     @Indexed(unique = true)
     private Double cartId;
     private Double price;
@@ -23,8 +29,10 @@ public class Item {
     private String createDate;
     private String updateDate;
 
+    // empty constructor
     public Item() {}
 
+    // customized constructor without id attribute which will be auto generated
     public Item(String name, Double cartId, Double price, Integer qty, boolean available, String createDate, String updateDate) {
         this.name = name;
         this.cartId = cartId;

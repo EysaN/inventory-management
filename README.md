@@ -5,6 +5,20 @@
 #### Supervisor: Boucetta Sara Imene
 #### Author: Eysa Nemeh
 
+
+---
+
+## The use case
+
+---
+
+In the world of online inventory managements systems, costumers of a system may browser of multiple items over the course of their sessions, and add them to a cart. Overtime, they will either checkout, and cart content is emptied, or the cart will expire.
+This interferes with the management of any inventory and make is hard to maintain a correct counts of available items.
+
+The solution provided here offers a modern approach to build an inventory management system with helpful operations on items and carts.
+
+---
+
 ## Some prerequisites and assumptions:
 
 --- 
@@ -23,14 +37,66 @@
 
 ---
 
-## The use case
+## Get started
 
 ---
 
-In the world of online inventory managements systems, costumers of a system may browser of multiple items over the course of their sessions, and add them to a cart. Overtime, they will either checkout, and cart content is emptied, or the cart will expire.
-This interferes with the management of any inventory and make is hard to maintain a correct counts of available items.
+To start the program either clone the repository somewhere into your local file system
 
-The solution provided here offers a modern approach to build an inventory management system with helpful operations on items and carts.
+```bash
+git clone https://github.com/EysaN/inventory-management.git
+```
+
+Or download the zip and extract it somewhere on local file system
+
+Open the project from IntelliJ
+
+Then create new connection configuration and click run or open the class `InvmngApplication` and hit run
+
+---
+
+## Operations
+
+---
+
++ find all items
+```http request
+http://localhost:8080/items
+```
++ find an item by id
+```http request
+http://localhost:8080/item/{id}
+```
+
++ find all items by name
+```http request
+http://localhost:8080/itemsByName/{name}
+```
+
++ find all items by cart id
+```http request
+http://localhost:8080/itemsByCart/{cartId}
+```
+
++ Add new item
+```http request
+http://localhost:8080/item/add/{query_parameters}
+```
+
++ delete an item by id
+```http request
+http://localhost:8080/item/delete/{id}
+```
+
++ delete all items by name
+```http request
+http://localhost:8080/itemsDeleteByName/{name}
+```
+
++ delete all items by cart id
+```http request
+http://localhost:8080/itemsDeleteByCart/{cartId}
+```
 
 ---
 
