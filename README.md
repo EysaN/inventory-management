@@ -32,13 +32,13 @@ The solution provided here offers a modern approach to build an inventory manage
  - The application's configuration (ports, hosts, ...) can also be modified in the `application.properties` file.
 
 
-**_In case of any problems, please refer to the author_**
+**_In case of any problems, please refer to the author._**
 
-**_This project is only intended for educational purposes, and not to be used commercially or production-ready_**
+**_This project is only intended for educational purposes, and not to be used commercially or production-ready._**
 
 **_This project is fully functional with two models: items and carts, and covers all requested points, where further 
 developments are a replication of basics system aspects, but it is a time-consuming process and will proceed with it 
-only if needed_**
+only if needed._**
 
 ---
 
