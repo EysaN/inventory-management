@@ -11,19 +11,19 @@ public class HomeController {
         return "<h1>Welcome to the home page!</h1>";
     }
 
-    @GetMapping("/developer")
+    @GetMapping("/level3")
     public String developer() {
-        return "<h1>Welcome developer!</h1>";
+        return "<h1>Welcome normal user!</h1>";
     }
 
-    @GetMapping("/submanager")
+    @GetMapping("/level2")
     public String user() {
-        return "<h1>Welcome submanager!</h1>";
+        return "<h1>Welcome sub-admin!</h1>";
     }
 
-    @GetMapping("/manager")
+    @GetMapping("/level1")
     public String admin() {
-        return "<h1>Welcome manager!</h1>";
+        return "<h1>Welcome admin!</h1>";
     }
 
 }

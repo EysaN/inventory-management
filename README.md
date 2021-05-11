@@ -60,43 +60,58 @@ Then create new connection configuration and click run or open the class `Invmng
 
 ---
 
-To authenticate use this username `dbu` and password `databases`
+To authenticate use according to API authentication:
+Admin (level1): this username `dbu` and password `databases`
+Sub admin (level2): this username `subuser` and password `subuser123`
+Normal customer (level3): this username `ben` and password `normal123`
 
-+ find all items
+Note: use the following API before requesting an API for a higher level of authentication:
+```http request
+http://localhost:8080/logout
+```
+
+Test your level of authentication:
+```
+http://localhost:8080/level1
+http://localhost:8080/level2
+http://localhost:8080/level3
+```
+
++ find all items (no authentication)
 ```http request
 http://localhost:8080/items
 ```
-+ find an item by id
++ find an item by id (no authentication)
 ```http request
 http://localhost:8080/item/{id}
 ```
 
-+ find all items by name
++ find all items by name (no authentication)
 ```http request
 http://localhost:8080/itemsByName/{name}
 ```
 
-+ find all items by cart id
++ find all items by cart id (no authentication)
 ```http request
 http://localhost:8080/itemsByCart/{cartId}
 ```
 
-+ Add new item
++ Add new item (sub-admins and admins)
 ```http request
 http://localhost:8080/item/add/{query_parameters}
 ```
 
-+ delete an item by id
++ delete an item by id (admins only)
 ```http request
 http://localhost:8080/item/delete/{id}
 ```
 
-+ delete all items by name
++ delete all items by name (admins only)
 ```http request
 http://localhost:8080/itemsDeleteByName/{name}
 ```
 
-+ delete all items by cart id
++ delete all items by cart id (admins only)
 ```http request
 http://localhost:8080/itemsDeleteByCart/{cartId}
 ```

@@ -32,28 +32,28 @@ public class ItemController {
         this.item = item;
     }
 
-    @GetMapping("/items")
+    @GetMapping("/items/all")
     @ResponseBody
     public List<Item> findAllItems() throws DataAccessException {
         logger.info("Getting all items");
         return new ArrayList<>(this.item.findAll());
     }
 
-    @GetMapping("/item/{id}")
+    @GetMapping("/items/{id}")
     @ResponseBody
     public Item findItemById(@PathVariable ObjectId id) throws DataAccessException {
         logger.info("Getting an item by id: " + id);
         return this.item.findItemById(id);
     }
 
-    @GetMapping("/itemsByCart/{cartId}")
+    @GetMapping("/items/findByCart/{cartId}")
     @ResponseBody
     public List<Item> findItemByCartId(@PathVariable Double cartId) throws DataAccessException {
         logger.info("Getting an item by CartId: " + cartId);
         return this.item.findItemsByCartId(cartId);
     }
 
-    @GetMapping("/itemsByName/{name}")
+    @GetMapping("/items/findByName/{name}")
     @ResponseBody
     public List<Item> findItemByName(@PathVariable String name) throws DataAccessException {
         logger.info("Getting an item by Name: " + name);
@@ -68,18 +68,26 @@ public class ItemController {
             @RequestParam(name="cartId", required = false, defaultValue = "0") Double cartId,
             @RequestParam(name="price", required = false, defaultValue = "0") Double price,
             @RequestParam(name="qty", required = false, defaultValue = "0") Integer qty,
-            @RequestParam(name="available", required = false, defaultValue = "false") boolean available,
-            @RequestParam(name="createDate", required = false, defaultValue = "0") String createDate,
-            @RequestParam(name="updateDate", required = false, defaultValue = "0") String updateDate
+            @RequestParam(name="available", required = false, defaultValue = "false") boolean available
     ) throws DataAccessException {
-        // add default values for the date fields
-        if (createDate.equals("0")){
-            createDate = getDateNow();
-        }
-        if (updateDate.equals("0")){
-            updateDate = getDateNow();
-        }
-        Item item = new Item(name, cartId, price, qty, available, createDate, updateDate);
+        // add new item with default values for the date fields
+        Item item = new Item(name, cartId, price, qty, available, getDateNow(), getDateNow());
+        this.item.insert(item);
+        logger.info("Adding new item with id: " + item.getId());
+    }
+
+    @GetMapping("/item/update/{id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public void updateItem(
+            @RequestParam(name="name", required = false, defaultValue = "item") String name,
+            @RequestParam(name="cartId", required = false, defaultValue = "0") Double cartId,
+            @RequestParam(name="price", required = false, defaultValue = "0") Double price,
+            @RequestParam(name="qty", required = false, defaultValue = "0") Integer qty,
+            @RequestParam(name="available", required = false, defaultValue = "false") boolean available
+    ) throws DataAccessException {
+        // update selected item and set update date to now
+        Item item = new Item(name, cartId, price, qty, available, getDateNow());
         this.item.insert(item);
         logger.info("Adding new item with id: " + item.getId());
     }
@@ -92,7 +100,7 @@ public class ItemController {
         this.item.deleteById(id);
     }
 
-    @GetMapping("/itemsDeleteByCart/{cartId}")
+    @GetMapping("/items/deleteByCart/{cartId}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public void deleteAllByCartId(@PathVariable Double cartId) throws DataAccessException {
@@ -100,7 +108,7 @@ public class ItemController {
         this.item.deleteAllByCartId(cartId);
     }
 
-    @GetMapping("/itemsDeleteByName/{name}")
+    @GetMapping("/items/deleteByName/{name}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public void deleteAllByName(@PathVariable String name) throws DataAccessException {

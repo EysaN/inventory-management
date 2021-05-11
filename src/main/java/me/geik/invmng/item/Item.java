@@ -42,4 +42,14 @@ public class Item {
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
+
+    // customized constructor without id and createDate attributes
+    public Item(String name, Double cartId, Double price, Integer qty, boolean available, String updateDate) {
+        this.name = name;
+        this.cartId = cartId;
+        this.price = price;
+        this.qty = qty;
+        this.available = available;
+        this.updateDate = updateDate;
+    }
 }

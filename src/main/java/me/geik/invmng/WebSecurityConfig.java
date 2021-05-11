@@ -13,13 +13,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/manager").hasRole("MANAGERS")
-                .antMatchers("/submanager").hasAnyRole("SUBMANAGERS", "MANAGERS")
-                .antMatchers("/developer").hasAnyRole("DEVELOPERS" ,"SUBMANAGERS" ,"MANAGERS")
-                .antMatchers("/items").hasAnyRole("DEVELOPERS" ,"SUBMANAGERS" ,"MANAGERS")
-                .antMatchers("/item/{id}").hasAnyRole("DEVELOPERS" ,"SUBMANAGERS" ,"MANAGERS")
-                .antMatchers("/").permitAll()
-                .anyRequest().fullyAuthenticated()
+                // Classification of admins APIs
+                .antMatchers("/level1", "/item/delete*", "/items/delete*").hasRole("ADMINS")
+                // Classification of admins and subamdins APIs
+                .antMatchers("/level2", "/item/add*", "/item/update*").hasAnyRole("SUBADMINS", "ADMINS")
+                // Classification of admins, subamdins and customers APIs
+                .antMatchers("/level3", "/carts", "/cart/{id}").hasAnyRole("CUSTOMERS" ,"SUBADMINS" ,"ADMINS")
+                // we only use the following command in case we need to authenticate all requests
+                //.anyRequest().fullyAuthenticated()
+                // other APIs are allowed for all users
+                .antMatchers("/**").permitAll()
                 .and()
                 .formLogin();
     }
