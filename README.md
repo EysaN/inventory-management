@@ -140,8 +140,8 @@ http://localhost:8080/cart/save/{query_parameters}
 
 Start adding data into the mongodb database using this emaple API:
 ```
-http://localhost:8080/cart/add?amount=0&description=this is a test cart
-http://localhost:8080/item/add?name=item0&cartId=1&price=1000&qty=3
+http://localhost:8080/cart/save?amount=0&description=this is a test cart
+http://localhost:8080/item/save?name=item0&cartId=1&price=1000&qty=3
 ```
 
 ---
