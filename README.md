@@ -119,10 +119,11 @@ http://localhost:8080/itemsDeleteByName/{name}
 http://localhost:8080/itemsDeleteByCart/{cartId}
 ```
 
+
 Start adding data into the mongodb database using this emaple API:
 ```
+http://localhost:8080/cart/add?amount=0&description=this is a test cart
 http://localhost:8080/item/add?name=item0&cartId=1&price=1000&qty=3
-http://localhost:8080/cart/add?amount=10000&description=this is a test cart
 ```
 
 ---
