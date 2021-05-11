@@ -99,9 +99,9 @@ http://localhost:8080/itemsByName/{name}
 http://localhost:8080/itemsByCart/{cartId}
 ```
 
-+ Add new item (sub-admins and admins)
++ Add new item / or update existing (sub-admins and admins)
 ```http request
-http://localhost:8080/item/add/{query_parameters}
+http://localhost:8080/item/save/{query_parameters}
 ```
 
 + delete an item by id (admins only)
@@ -117,6 +117,20 @@ http://localhost:8080/itemsDeleteByName/{name}
 + delete all items by cart id (admins only)
 ```http request
 http://localhost:8080/itemsDeleteByCart/{cartId}
+```
+
++ find all carts (no authentication)
+```http request
+http://localhost:8080/carts
+```
++ find an cart by id (no authentication)
+```http request
+http://localhost:8080/cart/{id}
+```
+
++ Add new cart / or update existing (sub-admins and admins)
+```http request
+http://localhost:8080/cart/save/{query_parameters}
 ```
 
 
