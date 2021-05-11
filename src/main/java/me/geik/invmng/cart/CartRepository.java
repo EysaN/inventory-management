@@ -8,8 +8,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "cart", path = "cart")
-public interface CartRepository extends MongoRepository<Cart, ObjectId> {
+public interface CartRepository extends MongoRepository<Cart, String> {
     List<Cart> findAll();
 
-    Cart findCartById(@Param("id") ObjectId id);
+    Cart findCartById(@Param("id") String id);
 }

@@ -16,7 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Classification of admins APIs
                 .antMatchers("/level1", "/item/delete*", "/items/delete*").hasRole("ADMINS")
                 // Classification of admins and subamdins APIs
-                .antMatchers("/level2", "/item/add*", "/item/update*").hasAnyRole("SUBADMINS", "ADMINS")
+                .antMatchers("/level2", "/item/save*", "/cart/save*").hasAnyRole("SUBADMINS", "ADMINS")
                 // Classification of admins, subamdins and customers APIs
                 .antMatchers("/level3", "/carts", "/cart/{id}").hasAnyRole("CUSTOMERS" ,"SUBADMINS" ,"ADMINS")
                 // we only use the following command in case we need to authenticate all requests

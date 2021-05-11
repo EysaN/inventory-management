@@ -1,5 +1,6 @@
 package me.geik.invmng.cart;
 
+import me.geik.invmng.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,23 +33,32 @@ public class CartController {
     }
 
     @GetMapping("/cart/{id}")
-    public @ResponseBody Cart findItemById(@PathVariable ObjectId id) throws DataAccessException {
+    public @ResponseBody Cart findItemById(@PathVariable String id) throws DataAccessException {
         logger.info("Getting a cart by id");
         return this.cart.findCartById(id);
     }
 
-    @GetMapping("/cart/add")
+    @GetMapping("/cart/save")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public void saveCart(
+            @RequestParam(name="id", required = false, defaultValue = "0") String id,
             @RequestParam(name="closed", required = false, defaultValue = "false") boolean closed,
             @RequestParam(name="amount", required = false, defaultValue = "0.0") Double amount,
-            @RequestParam(name="description", required = false, defaultValue = "new cart") String description
+            @RequestParam(name="description", required = false, defaultValue = "new cart") String description,
+            @RequestParam(name="items", required = false, defaultValue = "item0,item1") List<Item> items
     ) throws DataAccessException {
-        // add new cart with default values for the date fields
-        Cart cart = new Cart(closed, amount, description, getDateNow(), getDateNow());
-        this.cart.insert(cart);
-        logger.info("Adding new cart with id: " + cart.getId());
+        Cart cart;
+        // if no id is provided, it will insert new item with new auto generated id
+        if(id.equals("0")){
+            cart = new Cart(closed, amount, description, getDateNow(), getDateNow());
+        } else {
+            // add new cart with default values for the date fields
+            cart = new Cart(id, closed, amount, description, getDateNow(), items);
+        }
+
+        this.cart.save(cart);
+        logger.info("Adding/Updating cart with id: " + cart.getId());
     }
 
     // helper function to get the current date instance

@@ -18,11 +18,11 @@ public class Item {
 
     // we are defining that the "id" attribute is linked to (_id) field in our document
     @Id
-    private ObjectId id = new ObjectId();
+    private String id = new ObjectId().toHexString();
     private String name;
     // Creating an index on attribute cartId to optimize search by cart id
     @Indexed(unique = true)
-    private Double cartId;
+    private String cartId;
     private Double price;
     private Integer qty;
     private boolean available;
@@ -33,7 +33,7 @@ public class Item {
     public Item() {}
 
     // customized constructor without id attribute which will be auto generated
-    public Item(String name, Double cartId, Double price, Integer qty, boolean available, String createDate, String updateDate) {
+    public Item(String name, String cartId, Double price, Integer qty, boolean available, String createDate, String updateDate) {
         this.name = name;
         this.cartId = cartId;
         this.price = price;
@@ -44,7 +44,8 @@ public class Item {
     }
 
     // customized constructor without id and createDate attributes
-    public Item(String name, Double cartId, Double price, Integer qty, boolean available, String updateDate) {
+    public Item(String id, String name, String cartId, Double price, Integer qty, boolean available, String updateDate) {
+        this.id = id;
         this.name = name;
         this.cartId = cartId;
         this.price = price;

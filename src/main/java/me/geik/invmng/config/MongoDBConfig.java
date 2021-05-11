@@ -18,8 +18,13 @@ public class MongoDBConfig {
     @Bean
     CommandLineRunner commandLineRunner(ItemRepository itemRepository, CartRepository cartRepository) {
         return strings -> {
-            itemRepository.save(new Item());
-            cartRepository.save(new Cart());
+            if(itemRepository.findAll().size() <= 0){
+                itemRepository.save(new Item());
+            }
+            if(cartRepository.findAll().size() <= 0){
+                cartRepository.save(new Cart());
+            }
+
         };
     }
 

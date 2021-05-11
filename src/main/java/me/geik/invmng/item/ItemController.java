@@ -41,7 +41,7 @@ public class ItemController {
 
     @GetMapping("/items/{id}")
     @ResponseBody
-    public Item findItemById(@PathVariable ObjectId id) throws DataAccessException {
+    public Item findItemById(@PathVariable String id) throws DataAccessException {
         logger.info("Getting an item by id: " + id);
         return this.item.findItemById(id);
     }
@@ -60,42 +60,35 @@ public class ItemController {
         return this.item.findItemsByName(name);
     }
 
-    @GetMapping("/item/add")
+    @GetMapping("/item/save")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public void saveItem(
+            @RequestParam(name="id", required = false, defaultValue = "0") String id,
             @RequestParam(name="name", required = false, defaultValue = "item") String name,
-            @RequestParam(name="cartId", required = false, defaultValue = "0") Double cartId,
+            @RequestParam(name="cartId", required = false, defaultValue = "0") String cartId,
             @RequestParam(name="price", required = false, defaultValue = "0") Double price,
             @RequestParam(name="qty", required = false, defaultValue = "0") Integer qty,
             @RequestParam(name="available", required = false, defaultValue = "false") boolean available
     ) throws DataAccessException {
-        // add new item with default values for the date fields
-        Item item = new Item(name, cartId, price, qty, available, getDateNow(), getDateNow());
-        this.item.insert(item);
-        logger.info("Adding new item with id: " + item.getId());
-    }
-
-    @GetMapping("/item/update/{id}")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    public void updateItem(
-            @RequestParam(name="name", required = false, defaultValue = "item") String name,
-            @RequestParam(name="cartId", required = false, defaultValue = "0") Double cartId,
-            @RequestParam(name="price", required = false, defaultValue = "0") Double price,
-            @RequestParam(name="qty", required = false, defaultValue = "0") Integer qty,
-            @RequestParam(name="available", required = false, defaultValue = "false") boolean available
-    ) throws DataAccessException {
-        // update selected item and set update date to now
-        Item item = new Item(name, cartId, price, qty, available, getDateNow());
-        this.item.insert(item);
-        logger.info("Adding new item with id: " + item.getId());
+        Item item;
+        // if no id is provided, it will insert new item with new auto generated id
+        if(id.equals("0")){
+            item = new Item(name, cartId, price, qty, available, getDateNow(), getDateNow());
+        } else {
+            // update the item with provided id, or add it of not id not found
+            item = new Item(id, name, cartId, price, qty, available, getDateNow());
+        }
+        // this save is not declared in the repository interface
+        // but we can use directly here, it acts like an upsert operation
+        this.item.save(item);
+        logger.info("Adding/Updating item with id: " + item.getId());
     }
 
     @GetMapping("/item/delete/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public void deleteById(@PathVariable ObjectId id) throws DataAccessException {
+    public void deleteById(@PathVariable String id) throws DataAccessException {
         logger.info("Deleting an item by id: " + id);
         this.item.deleteById(id);
     }
@@ -122,5 +115,6 @@ public class ItemController {
         return instant.toString();
     }
 
+    // create new cart if id is not found
 
 }
