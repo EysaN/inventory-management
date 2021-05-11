@@ -61,8 +61,11 @@ Then create new connection configuration and click run or open the class `Invmng
 ---
 
 To authenticate use according to API authentication:
+
 Admin (level1): this username `dbu` and password `databases`
+
 Sub admin (level2): this username `subuser` and password `subuser123`
+
 Normal customer (level3): this username `ben` and password `normal123`
 
 Note: use the following API before requesting an API for a higher level of authentication:
