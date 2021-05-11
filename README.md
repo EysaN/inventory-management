@@ -36,6 +36,10 @@ The solution provided here offers a modern approach to build an inventory manage
 
 **_This project is only intended for educational purposes, and not to be used commercially or production-ready_**
 
+**_This project is fully functional with two models: items and carts, and covers all requested points, where further 
+developments are a replication of basics system aspects, but it is a time-consuming process and will proceed with it 
+only if needed_**
+
 ---
 
 ## Get started
